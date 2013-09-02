@@ -47,5 +47,6 @@
     go();
   };
   
-	$(".marquee").marquee(44);
+	$(".marquee").marquee(54);
+
 })(jQuery);
