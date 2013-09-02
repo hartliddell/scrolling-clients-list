@@ -35,7 +35,8 @@ function lf_clients_custom_post_type() {
 		'public' 				=> true,
 		'menu_position' => 5,
 		'supports' 			=> array('title'),
-		'has_archive' 	=> true
+		'has_archive' 	=> true,
+		'rewrite' => array('slug' => 'clients')
 	);
 
 	register_post_type('lf_clients', $args);
@@ -45,7 +46,7 @@ function lf_clients_custom_post_type() {
 add_action('init', 'lf_clients_custom_post_type');
 
 /******************************************
-* CREATE CUSTOM META BOXE FOR CLIENT URL
+* CREATE CUSTOM META BOX FOR CLIENT URL
 ******************************************/
 
 /* Fire our meta box setup function on the post editor screen. */
@@ -125,10 +126,10 @@ function lf_save_client_url( $post_id, $post ) {
 * ADD SHORTCODE TO SHOW CLIENT URLS
 ******************************************/
 
-//[show_clients]
+//shortcode: [show_clients]
 add_shortcode( 'show_clients', 'show_clients_func' );
 
-function show_clients_func(){
+function show_clients_func() {
 
 	$args = array(
 		'post_type' => 'lf_clients',
@@ -164,3 +165,13 @@ function show_clients_func(){
 return $clients_output;
 
 }
+
+
+function add_js_scroll_text_vert() {
+
+	wp_register_script( 'scroll-text-vert', plugins_url( '/js/scroll-text-vert.js', __FILE__ ), '', '', true );
+	wp_enqueue_script( 'scroll-text-vert' );
+
+}
+
+add_action( 'wp_enqueue_scripts', 'add_js_scroll_text_vert' );
