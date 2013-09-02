@@ -36,7 +36,7 @@ function lf_clients_custom_post_type() {
 		'menu_position' => 5,
 		'supports' 			=> array('title'),
 		'has_archive' 	=> true,
-		'rewrite' => array('slug' => 'clients')
+		'rewrite' => array('slug' => 'clients_list')
 	);
 
 	register_post_type('lf_clients', $args);
