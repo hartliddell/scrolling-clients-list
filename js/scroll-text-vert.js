@@ -1,22 +1,6 @@
 (function($) {	 
   $.fn.marquee = function(speed) {
 
-  	$(this).css({
-      'margin'     : '0',
-      'padding'    : '0',
-  		'position'	 : 'relative',
-  		'height'		 : '400',
-  		'text-align' : 'center',
-      'list-style' : 'none',
-      'display'    : 'block',
-      'overflow'   : 'hidden'
-  	});
-  	
-  	$('li', this).css({
-  		'position' : 'absolute',
-  		'width' 	 : '100%'
-  	});
-
     var height = parseInt($('.marquee li').css('height'), 10),
         num_of_li = $('.marquee li').size(),
         marq_height = parseInt($('.marquee').css('height'), 10),

@@ -1,0 +1,16 @@
+.marquee {
+  margin: 0;
+  padding: 0;
+  position: relative;   
+  height: 400;          
+  width: 100%;
+  text-align: center;
+  list-style: none;
+  overflow: hidden;     
+}
+
+.marquee li {
+  position: absolute;   
+  height: 40px;
+  width: 100%;
+}

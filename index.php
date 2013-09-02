@@ -174,4 +174,13 @@ function add_js_scroll_text_vert() {
 
 }
 
-add_action( 'wp_enqueue_scripts', 'add_js_scroll_text_vert' );
+add_action( 'wp_enqueue_scripts', 'add_js_scroll_text_vert', 20 );
+
+function add_css_scroll_text_vert() {
+
+	wp_register_style( 'scroll-text-vert', plugins_url( '/css/scroll-text-vert.css', __FILE__ ), '', '', 'all' );
+	wp_enqueue_style( 'scroll-text-vert' );
+
+}
+
+add_action( 'wp_enqueue_scripts', 'add_css_scroll_text_vert' );
