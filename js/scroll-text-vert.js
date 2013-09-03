@@ -9,7 +9,8 @@
 		var height = parseInt($('.marquee li').css('height'), 10),
 				num_of_li = $('.marquee li').size(),
 				marq_height = parseInt($('.marquee').css('height'), 10),
-				hover = false;
+				hover = false,
+                                go_timer = '';
 
 		// SET EACH LI POSITION TOP based on that li number in list
 		$('.marquee li').each(function() {
@@ -22,13 +23,14 @@
 		});
 
 		// ON MOUSEOVER pause marquee animation
-		$(this).mouseover(function() {
+		$('li', this).mouseover(function() {
 			
 			hover = true;
 
 		}).mouseout(function() {
 
 			hover = false;
+                        window.clearTimeout(go_timer);
 			go();
 
 		});
@@ -50,7 +52,7 @@
 
 				});
 	
-				setTimeout(go, speed);
+				go_timer = window.setTimeout(go, speed);
 
 			}
 		};
