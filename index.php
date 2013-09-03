@@ -11,6 +11,8 @@
 * ADD CUSTOM POST TYPE
 ******************************************/
 
+add_action('init', 'lf_clients_custom_post_type');
+
 function lf_clients_custom_post_type() {
 	
 	$labels = array(
@@ -43,8 +45,6 @@ function lf_clients_custom_post_type() {
 
 }
 
-add_action('init', 'lf_clients_custom_post_type');
-
 /******************************************
 * CREATE CUSTOM META BOX FOR CLIENT URL
 ******************************************/
@@ -67,12 +67,12 @@ function lf_clients_url_setup() {
 function lf_add_clients_url() {
 
 	add_meta_box(
-		'lf-client-url-class',			// Unique ID
+		'lf-client-url-class',										// Unique ID
 		esc_html__( 'Client URL', 'example' ),		// Title
-		'lf_client_url_meta_boxes',		// Callback function
-		'lf_clients',					// Admin page (or post type)
-		'normal',					// Context
-		'default'					// Priority
+		'lf_client_url_meta_boxes',								// Callback function
+		'lf_clients',															// Admin page (or post type)
+		'normal',																	// Context
+		'default'																	// Priority
 	);
 }
 
@@ -129,6 +129,15 @@ function lf_save_client_url( $post_id, $post ) {
 //shortcode: [show_clients]
 add_shortcode( 'show_clients', 'show_clients_func' );
 
+/* ONLY LOAD CSS/JS on page whose URL includes word 'clients' */
+$url = $_SERVER['REQUEST_URI'];
+if (false !== strpos($url,'clients')) {
+
+	add_action( 'wp_enqueue_scripts', 'add_js_scroll_text_vert', 20 );
+	add_action( 'wp_enqueue_scripts', 'add_css_scroll_text_vert', 20 );
+
+}
+
 function show_clients_func() {
 
 	$args = array(
@@ -166,7 +175,6 @@ return $clients_output;
 
 }
 
-
 function add_js_scroll_text_vert() {
 
 	wp_register_script( 'scroll-text-vert', plugins_url( '/js/scroll-text-vert.js', __FILE__ ), '', '', true );
@@ -174,13 +182,9 @@ function add_js_scroll_text_vert() {
 
 }
 
-add_action( 'wp_enqueue_scripts', 'add_js_scroll_text_vert', 20 );
-
 function add_css_scroll_text_vert() {
 
 	wp_register_style( 'scroll-text-vert', plugins_url( '/css/scroll-text-vert.css', __FILE__ ), '', '', 'all' );
 	wp_enqueue_style( 'scroll-text-vert' );
 
 }
-
-add_action( 'wp_enqueue_scripts', 'add_css_scroll_text_vert' );
